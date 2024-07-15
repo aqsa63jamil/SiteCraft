@@ -1,0 +1,32 @@
+label,p,span{
+    font-size: 17px;
+    font-weight: 600;
+}
+.border-divider{
+    border-right: 1px solid #e6e6e6;
+}
+.container h1{
+    font-size: 3rem;
+}
+.column-divider{
+    top: 50%;
+    left:97% !important;
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.no-outline:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 991px) {
+    .border-divider {
+        border: 0;
+    }
+    .column-divider{
+        display: none;
+    }
+}
