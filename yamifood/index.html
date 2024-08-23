@@ -55,6 +55,8 @@
 								<a class="dropdown-item" href="reservation.html">Order Now</a>
 								<a class="dropdown-item" href="stuff.html">Stuff</a>
 								<a class="dropdown-item" href="gallery.html">Gallery</a>
+								<a class="dropdown-item" href="./cart.html">Cart</a>
+								<a class="dropdown-item" href="./checkout.html">Checkout</a>
 							</div>
 						</li>
 						<li class="nav-item dropdown">
@@ -159,40 +161,41 @@
 	<!-- End QT -->
 	
 	<!-- Start Menu -->
-	<div class="menu-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>Special Menu</h2>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="special-menu text-center">
-						<div class="button-group filter-button-group">
-							<button class="active" data-filter="*">All</button>
-							<button data-filter=".drinks">Drinks</button>
-							<button data-filter=".lunch">Lunch</button>
-							<button data-filter=".dinner">Dinner</button>
-						</div>
-					</div>
-				</div>
-			</div>
-				
-			<div class="row special-list">
-				<div class="col-lg-4 col-md-6 special-grid drinks">
-					<div class="gallery-single fix">
-						<img src="images/img-01.jpg" class="img-fluid" alt="Image">
-						<div class="why-text">
-							<h4>Special Drinks 1</h4>
-							<p>Sed id magna vitae eros sagittis euismod.</p>
-							<h5> $7.79</h5>
-						</div>
-					</div>
-				</div>
+<div class="menu-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading-title text-center">
+                    <h2>Special Menu</h2>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="special-menu text-center">
+                    <div class="button-group filter-button-group">
+                        <button class="active" data-filter="*">All</button>
+                        <button data-filter=".drinks">Drinks</button>
+                        <button data-filter=".lunch">Lunch</button>
+                        <button data-filter=".dinner">Dinner</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row special-list">
+            <div class="col-lg-4 col-md-6 special-grid drinks">
+                <div class="gallery-single fix">
+                    <img src="images/img-01.jpg" class="img-fluid" alt="Image">
+                    <div class="why-text">
+                        <h4>Special Drinks 1</h4>
+                        <p>Sed id magna vitae eros sagittis euismod.</p>
+                        <h5>$7.79</h5>
+						<button class="btn add-to-cart" data-name="Special Drinks 1" data-price="7.79" data-image="images/img-01.jpg">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 				
 				<div class="col-lg-4 col-md-6 special-grid drinks">
 					<div class="gallery-single fix">
@@ -201,6 +204,7 @@
 							<h4>Special Drinks 2</h4>
 							<p>Sed id magna vitae eros sagittis euismod.</p>
 							<h5> $9.79</h5>
+							<button class=" add-to-cart" data-name="Special Drinks 2" data-price="9.79" data-image="images/img-02.jpg">Add to Cart</button>
 						</div>
 					</div>
 				</div>
@@ -212,6 +216,7 @@
 							<h4>Special Drinks 3</h4>
 							<p>Sed id magna vitae eros sagittis euismod.</p>
 							<h5> $10.79</h5>
+							<button class="btn add-to-cart" data-name="Special Drinks 3" data-price="10.79" data-image="images/img-03.jpg">Add to Cart</button>
 						</div>
 					</div>
 				</div>
@@ -223,6 +228,7 @@
 							<h4>Special Lunch 1</h4>
 							<p>Sed id magna vitae eros sagittis euismod.</p>
 							<h5> $15.79</h5>
+							<button class="btn add-to-cart" data-name="Special Lunch 1" data-price="15.79" data-image="images/img-04.jpg">Add to Cart</button>
 						</div>
 					</div>
 				</div>
@@ -234,6 +240,7 @@
 							<h4>Special Lunch 2</h4>
 							<p>Sed id magna vitae eros sagittis euismod.</p>
 							<h5> $18.79</h5>
+							<button class="btn add-to-cart" data-name="Special Lunch 2" data-price="18.79" data-image="images/img-05.jpg">Add to Cart</button>
 						</div>
 					</div>
 				</div>
@@ -245,6 +252,7 @@
 							<h4>Special Lunch 3</h4>
 							<p>Sed id magna vitae eros sagittis euismod.</p>
 							<h5> $20.79</h5>
+							<button class="btn add-to-cart" data-name="Special Lunch 3" data-price="20.79" data-image="images/img-06.jpg">Add to Cart</button>
 						</div>
 					</div>
 				</div>
@@ -256,6 +264,7 @@
 							<h4>Special Dinner 1</h4>
 							<p>Sed id magna vitae eros sagittis euismod.</p>
 							<h5> $25.79</h5>
+							<button class="btn add-to-cart" data-name="Special Dinner 1" data-price="25.79" data-image="images/img-07.jpg">Add to Cart</button>
 						</div>
 					</div>
 				</div>
@@ -267,6 +276,7 @@
 							<h4>Special Dinner 2</h4>
 							<p>Sed id magna vitae eros sagittis euismod.</p>
 							<h5> $22.79</h5>
+							<button class="btn add-to-cart" data-name="Special Dinner 2" data-price="22.79" data-image="images/img-08.jpg">Add to Cart</button>
 						</div>
 					</div>
 				</div>
@@ -278,10 +288,10 @@
 							<h4>Special Dinner 3</h4>
 							<p>Sed id magna vitae eros sagittis euismod.</p>
 							<h5> $24.79</h5>
+							<button class="btn add-to-cart" data-name="Special Dinner 3" data-price="24.79" data-image="images/img-09.jpg">Add to Cart</button>
 						</div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -483,6 +493,39 @@
 	<!-- End Footer -->
 	
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+ 
+ <script>
+	 document.addEventListener('DOMContentLoaded', function () {
+		 const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+		 addToCartButtons.forEach(button => {
+			 button.addEventListener('click', function () {
+				 const name = this.getAttribute('data-name');
+				 const price = parseFloat(this.getAttribute('data-price'));
+				 const image = this.getAttribute('data-image');
+				 addToCart({ name, price, image, quantity: 1 });
+				 window.location.href = 'cart.html'; // Redirect to cart page after adding to cart
+			 });
+		 });
+
+		 function addToCart(product) {
+			 let cart = JSON.parse(localStorage.getItem('yamifoodCart')) || [];
+
+			 const existingProductIndex = cart.findIndex(item => item.name === product.name);
+			 if (existingProductIndex > -1) {
+				 cart[existingProductIndex].quantity += 1;
+			 } else {
+				 cart.push(product);
+			 }
+
+			 localStorage.setItem('yamifoodCart', JSON.stringify(cart));
+		 }
+	 });
+ </script>
+
+ <!-- Include jQuery and Bootstrap JS -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 	<!-- ALL JS FILES -->
 	<script src="js/jquery-3.2.1.min.js"></script>
