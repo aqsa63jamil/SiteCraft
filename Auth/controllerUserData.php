@@ -24,8 +24,9 @@ function getAuthCookie() {
     return "";
 }
 
-// Pre-fill the email field if the cookie exists
+// Pre-fill the email and password field if the cookie exists
 $email = getAuthCookie();
+$password = getAuthCookie();
 
 //if user signup button
 if(isset($_POST['signup'])){
@@ -115,6 +116,13 @@ if(isset($_POST['login'])){
                 $_SESSION['email'] = $email;
                 $_SESSION['password'] = $password;
                 setAuthCookie($email);
+                setAuthCookie($password);
+
+                // Update the user's status to active
+                $update_status_query = "update users set Status_Update = 'active' WHERE email = '$email'";
+                $stmt = $conn->prepare($update_status_query);
+                $stmt->execute();
+
                 header("Location:../Create_Store/website_buildup.php");
                 // echo '<script>window.location.href = "../Create_store/website_buildup.php";</script>';
                 ob_clean();
