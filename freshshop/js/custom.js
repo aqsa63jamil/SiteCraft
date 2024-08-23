@@ -1,5 +1,87 @@
 (function($) {
     "use strict";
+
+	/* ..............................................
+	   Products 
+	   ................................................. */
+	   $(document).ready(function() {
+		const storeName = "Stoe23";
+		let allProducts = [];
+	
+		$.getJSON(`php/products_fetch.php?storeName=${encodeURIComponent(storeName)}`)
+			.done(function(data) {
+				if (data.error) {
+					console.error(data.error);
+					return;
+				}
+	
+				allProducts = data.products;
+	
+				const pageType = $('body').data('page-type');
+	
+				if (pageType === 1) {
+					
+					renderProducts(allProducts.slice(0, 4));
+				} else {
+					renderProducts(allProducts);
+				}
+			})
+			.fail(function(jqXHR, textStatus, errorThrown) {
+				console.error('Error fetching products:', errorThrown);
+			});
+	
+		$.getJSON(`php/store_data.php?storeName=${encodeURIComponent(storeName)}`)
+			.done(function(data) {
+				if (data.error) {
+					console.error(data.error);
+				} else {
+					$('#previewLogo').attr('src', data.logo);
+				}
+			})
+			.fail(function(jqXHR, textStatus, errorThrown) {
+				console.error('Error fetching store data:', errorThrown);
+			});
+	});
+	
+	function renderProducts(products) {
+		const $list = $('.productList');
+		$list.empty();
+	
+		if (products.length === 0) {
+			$list.html('No products found.');
+		} else {
+			products.forEach(function(product) {
+				const card = `
+					 <div class="col-lg-3 col-md-6 special-grid best-seller">
+                    <div class="products-single fix">
+                        <div class="box-img-hover">
+                            <div class="type-lb">
+							${product.isNew === 'New' ? '<p class="new">New</p>' : ''} 
+                            </div>
+                            <img src="${product.image}"  class="img-fluid" alt="${product.name}">
+                            <div class="mask-icon">
+                                <ul>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                </ul>
+                                <a class="cart" href="#">Add to Cart</a>
+                            </div>
+                        </div>
+                        <div class="why-text">
+                            <h4>${product.description}</h4>
+                            <h5> $${product.price}</h5>
+                        </div>
+                    </div>
+                </div>`;
+				$list.append(card);
+			});
+		}
+	}
+	
+
+
+
 	
 	/* ..............................................
 	   Loader 
@@ -10,6 +92,10 @@
 		$('body').delay(450).css({
 			'overflow': 'visible'
 		});
+
+
+
+
 	});
 
 	/* ..............................................
