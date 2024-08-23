@@ -1,12 +1,44 @@
-// document.getElementById('learnMoreBtn').addEventListener('click', function() {
-//     alert('More information will be available soon!');
-// });
+document.addEventListener("DOMContentLoaded", function() {
+    const desktopIcon = document.getElementById('desktopIcon');
+    const mobileIcon = document.getElementById('mobileIcon');
+   
+    const templateFrames = document.querySelectorAll('.templateFrame');
 
-// document.getElementById('contactForm').addEventListener('submit', function(event) {
-//     event.preventDefault();
-//     alert('Message sent successfully!');
-// });
+    desktopIcon.addEventListener('click', function() {
+        templateFrames.forEach(frame => {
+            if (!frame.classList.contains('d-none')) {
+                const templateSrc = frame.getAttribute('src');
+                window.open('desktop_view.php?src=' + encodeURIComponent(templateSrc), '_blank');
+            }
+        });
+    });
 
+    mobileIcon.addEventListener('click', function() {
+        templateFrames.forEach(frame => {
+            if (!frame.classList.contains('d-none')) {
+                const templateSrc = frame.getAttribute('src');
+                window.open('mobile_view.php?src=' + encodeURIComponent(templateSrc), '_blank');
+            }
+        });
+    });
+
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const viewMode = urlParams.get('viewMode');
+
+    if (viewMode === 'desktop' || viewMode === 'mobile') {
+        closeIcon.classList.remove('hidden');
+    }
+
+    const firstRadioButton = document.querySelector('.card input[type="radio"]');
+    if (firstRadioButton) {
+        firstRadioButton.checked = true;
+        document.querySelector('.btn-next').disabled = false;
+        userData.template = "../Templates/" + firstRadioButton.value + "/index.html";
+        updateSelectedTemplate();
+    }
+
+});
 
 // CUSTOM SELECT ELEMENT
 let userData = {
@@ -15,10 +47,6 @@ let userData = {
     template: ''
 };
 
-document.getElementById('storeForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent the form from submitting
-    // Handle form submission if needed
-});
 
 document.getElementById('continueButton').addEventListener('click', function () {
     const categorySection = document.getElementById('categorySection');
@@ -37,10 +65,26 @@ document.getElementById('continueNameButton').addEventListener('click', function
     const storeName = document.getElementById('storeName').value;
 
     if (storeName) {
-        userData.storeName = storeName;
-        nameSection.classList.add('d-none');
-        logoSection.classList.remove('d-none');
-        updatePreview();
+       
+        fetch('check_store_name.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `storeName=${encodeURIComponent(storeName)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                alert('Store name already taken. Please select another name.');
+            } else {
+                userData.storeName = storeName;
+                nameSection.classList.add('d-none');
+                logoSection.classList.remove('d-none');
+                updatePreview();
+            }
+        })
+        .catch(error => console.error('Error:', error));
     }
 });
 
@@ -89,11 +133,11 @@ function updatePreview() {
 
         const templateDoc = templateFrame.contentWindow.document;
         
+
         templateDoc.title = userData.storeName;
 
         if (userData.storeLogo) {
             const templateLogo = templateDoc.getElementById('previewLogo');
-            console.log(templateLogo);
             templateLogo.src = userData.storeLogo;
             templateLogo.style.display = 'block';
         }
@@ -140,16 +184,28 @@ function selectTemplate(event) {
     }
     const templatePrev = "../Templates/" + radioButton.value + "/index.html";
 
-    if (radioButton.checked) {
-        radioButton.checked = false;
-        document.querySelector('.btn-next').disabled = true;
-    } else {
-        document.querySelectorAll('.card input[type="radio"]').forEach(rb => rb.checked = false);
-        radioButton.checked = true;
-        document.querySelector('.btn-next').disabled = false;
-        userData.template = templatePrev;
-        updateSelectedTemplate();
+    document.querySelectorAll('.card input[type="radio"]').forEach(rb => {
+        const hiddenInput = rb.closest('.card').querySelector('.preview-image-url');
+        rb.checked = false;
+        if (hiddenInput) {
+            hiddenInput.value = '';
+            hiddenInput.removeAttribute('name');
+        }
+    });
+
+    radioButton.checked = true;
+    const selectedImgElement = cardElement.querySelector('.card-img-top');
+    if (selectedImgElement) {
+        
+        const hiddenInput = cardElement.querySelector('.preview-image-url');
+        if (hiddenInput) {
+            hiddenInput.setAttribute('name', 'preview_image');
+            hiddenInput.value = selectedImgElement.src;
+        }
     }
+    document.querySelector('.btn-next').disabled = false;
+    userData.template = templatePrev;
+    updateSelectedTemplate();
 }
 
 function updateSelectedTemplate() {
@@ -168,14 +224,12 @@ function updateSelectedTemplate() {
 
         if (userData.storeLogo) {
             const templateLogo = templateDoc.getElementById('previewLogo');
-           
             templateLogo.src = userData.storeLogo;
             templateLogo.style.display = 'block';
         }
     }
 }
 
-// Ensure dropdown selection updates the hidden input field
 document.querySelectorAll('.dropdown-item').forEach((item) => {
     item.addEventListener('click', function (event) {
         document.getElementById('customSelectValue').value = event.target.getAttribute('data-value');
@@ -183,31 +237,5 @@ document.querySelectorAll('.dropdown-item').forEach((item) => {
     });
 });
 
-//index page
 
-document.addEventListener("DOMContentLoaded", function () {
-    const accordionButtons = document.querySelectorAll('.accordion-button');
 
-    accordionButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const activeButton = document.querySelector('.accordion-button:not(.collapsed)');
-            if (activeButton && activeButton !== button) {
-                activeButton.click();
-            }
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-const observer = new IntersectionObserver((entries) => {
-entries.forEach((entry) => {
-  if (entry.isIntersecting) {
-    entry.target.classList.add('slide-in-left');
-  }
-});
-});
-
-document.querySelectorAll('.slide-in-left').forEach((section) => {
-observer.observe(section);
-});
-});
