@@ -1,9 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("font-awesome.min.css");
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --primary1: #f89cab;
+  --btnColor: #db4f66;
+  --secondary: #f0e68c;
+  --accent: #ff6f61;
+  --font: "Poppins", sans-serif;
+}
+
 body {
-  font-family: "poppins", sans-serif;
-  color: #101010;
-  background-color: #ffffff;
+  font-family: var(--font);
+  color: var(--black);
+  background-color: var(--white);
 }
 body::-webkit-scrollbar {
   width: 0 !important;
@@ -50,7 +60,7 @@ body::-webkit-scrollbar {
 }
 
 .heading_container h2 span {
-  color: #f89cab;
+  color: var(--primary1);
 }
 
 .heading_container.heading_center {
@@ -80,7 +90,7 @@ body::-webkit-scrollbar {
 }
 
 #navbarSupportedContent.innerpage_navbar {
-  background-color: white;
+  background-color: var(--white);
   border-radius: 10px;
   -webkit-box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
           box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25);
@@ -99,7 +109,7 @@ body::-webkit-scrollbar {
 }
 
 #navbarSupportedContent .nav-item.active .nav-link {
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 
 a,
@@ -128,7 +138,7 @@ a:focus {
 .navbar-brand span {
   font-size: 28px;
   font-weight: bold;
-  color: #000000;
+  color: var(--black);
   text-transform: uppercase;
   margin: 0;
   padding: 0;
@@ -171,7 +181,7 @@ a:focus {
   display: block;
   width: 35px;
   height: 4px;
-  background-color: #000000;
+  background-color: var(--black);
   margin: 7px 0;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
@@ -187,7 +197,7 @@ a:focus {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: #000000;
+  background-color: var(--black);
   top: -10px;
   border-radius: 5px;
   -webkit-transition: all .3s;
@@ -226,7 +236,7 @@ a:focus {
 
 .user_option a {
   margin-right: 25px;
-  color: #000000;
+  color: var(--black);
 }
 
 .user_option a span {
@@ -236,8 +246,8 @@ a:focus {
 /*end header section*/
 .slider_section .slider_container {
   color: #fefefe;
-  background-color: #000000;
-  background-color: #f89cab;
+  background-color: var(--black);
+  background-color: var(--primary1);
   padding: 25px;
   border-radius: 0 0 15px 15px;
 }
@@ -276,9 +286,9 @@ a:focus {
 .slider_section .detail-box a {
   display: inline-block;
   padding: 10px 40px;
-  background-color: #db4566;
-  color: #ffffff;
-  border: 1px solid #db4566;
+  background-color: var(--btnColor);
+  color: var(--white);
+  border: 1px solid var(--btnColor);
   border-radius: 5px;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -288,14 +298,14 @@ a:focus {
 
 .slider_section .detail-box a:hover {
   background-color: transparent;
-  color: #db4566;
+  color: var(--btnColor);
 }
 
 .slider_section .carousel_btn-box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: #ffffff;
+  background-color: var(--white);
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -318,7 +328,7 @@ a:focus {
   background-repeat: no-repeat;
   opacity: 1;
   background-position: center;
-  color: #000000;
+  color: var(--black);
   font-size: 14px;
 }
 
@@ -327,6 +337,8 @@ a:focus {
 }
 
 .shop_section .box {
+  border: 1px solid var(--secondary);
+  border-radius: 12px;
   background-color: #eeeeee;
   position: relative;
   padding: 10px;
@@ -334,7 +346,7 @@ a:focus {
 }
 
 .shop_section .box a {
-  color: #000000;
+  color: var(--black);
 }
 
 .shop_section .box .img-box {
@@ -366,7 +378,7 @@ a:focus {
 }
 
 .shop_section .box .detail-box h6 span {
-  color: #db4f66;
+  color: var(--btnColor);
 }
 
 .shop_section .box .new {
@@ -375,7 +387,7 @@ a:focus {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #ffffff;
+  background-color: var(--white);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -402,9 +414,9 @@ a:focus {
 .shop_section .btn-box a {
   display: inline-block;
   padding: 10px 40px;
-  background-color: #f16179;
-  color: #ffffff;
-  border: 1px solid #f16179;
+  background-color: var(--btnColor);
+  color: var(--white);
+  border: 1px solid var(--btnColor);
   border-radius: 5px;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -412,7 +424,7 @@ a:focus {
 
 .shop_section .btn-box a:hover {
   background-color: transparent;
-  color: #f16179;
+  color: var(--btnColor);
 }
 
 .saving_section {
@@ -422,8 +434,8 @@ a:focus {
 
 .saving_section .box {
   padding-top: 45px;
-  background-color: #7fd7eb;
-  color: #ffffff;
+  background-color: var(--secondary);
+  color: var(--white);
   border-radius: 15px;
 }
 
@@ -467,9 +479,9 @@ a:focus {
 .saving_section .detail-box .btn-box .btn1 {
   display: inline-block;
   padding: 10px 0;
-  background-color: #109dbd;
-  color: #ffffff;
-  border: 1px solid #109dbd;
+  background-color: var(--accent);
+  color: var(--white);
+  border: 1px solid var(--accent);
   border-radius: 0;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -477,15 +489,15 @@ a:focus {
 
 .saving_section .detail-box .btn-box .btn1:hover {
   background-color: transparent;
-  color: #109dbd;
+  color: var(--accent);
 }
 
 .saving_section .detail-box .btn-box .btn2 {
   display: inline-block;
   padding: 10px 0;
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #ffffff;
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--white);
   border-radius: 0;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -493,7 +505,7 @@ a:focus {
 
 .saving_section .detail-box .btn-box .btn2:hover {
   background-color: transparent;
-  color: #ffffff;
+  color: var(--white);
 }
 
 .why_section .box {
@@ -511,7 +523,7 @@ a:focus {
 .why_section .box .img-box svg {
   width: 55px;
   height: auto;
-  fill: #320b57;
+  fill: var(--accent);
 }
 
 .gift_section {
@@ -520,9 +532,9 @@ a:focus {
 }
 
 .gift_section .box {
-  background-color: #6929a5;
+  background-color: var(--accent);
   border-radius: 15px;
-  color: #ffffff;
+  color: var(--white);
 }
 
 .gift_section .row {
@@ -565,9 +577,9 @@ a:focus {
 .gift_section .detail-box .btn-box .btn1 {
   display: inline-block;
   padding: 10px 0;
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #ffffff;
+  background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--white);
   border-radius: 0;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -575,15 +587,15 @@ a:focus {
 
 .gift_section .detail-box .btn-box .btn1:hover {
   background-color: transparent;
-  color: #ffffff;
+  color: var(--white);
 }
 
 .gift_section .detail-box .btn-box .btn2 {
   display: inline-block;
   padding: 10px 0;
-  background-color: #9242dd;
-  color: #ffffff;
-  border: 1px solid #9242dd;
+  background-color: var(--accent);
+  color: var(--white);
+  border: 1px solid var(--accent);
   border-radius: 0;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -591,7 +603,7 @@ a:focus {
 
 .gift_section .detail-box .btn-box .btn2:hover {
   background-color: transparent;
-  color: #9242dd;
+  color: var(--accent);
 }
 
 .contact_section {
@@ -652,20 +664,20 @@ a:focus {
 .contact_section button {
   display: inline-block;
   padding: 12px 45px;
-  background-color: #db4f66;
-  color: #ffffff;
-  border: 1px solid #db4f66;
+  background-color: var(--btnColor);
+  color: var(--white);
+  border: 1px solid var(--btnColor);
   border-radius: 0;
   -webkit-transition: all .3s;
   transition: all .3s;
   display: block;
-  color: #fff;
+  color: var(--white);
   margin: 35px auto 0 auto;
 }
 
 .contact_section button:hover {
   background-color: transparent;
-  color: #db4f66;
+  color: var(--btnColor);
 }
 
 .contact_section .map_container {
@@ -699,7 +711,7 @@ a:focus {
 
 .client_section .box .client_info .client_name h5 {
   font-weight: 600;
-  color: #db4f66;
+  color: var(--btnColor);
 }
 
 .client_section .box .client_info .client_name h6 {
@@ -721,7 +733,7 @@ a:focus {
 .client_section .carousel-control-next {
   width: 45px;
   height: 125px;
-  background-color: #db4f66;
+  background-color: var(--btnColor);
   opacity: 1;
   font-size: 28px;
   font-weight: bold;
@@ -741,8 +753,8 @@ a:focus {
 /* info section */
 .info_section {
   position: relative;
-  background-color: #2d2d2d;
-  color: #ffffff;
+  background-color: var(--btnColor);
+  color: var(--white);
   margin: 0 45px 45px;
 }
 
@@ -768,7 +780,7 @@ a:focus {
 
 .info_section .social_container .social_box a {
   margin: 0 10px;
-  color: #ffffff;
+  color: var(--white);
   font-size: 24px;
 }
 
@@ -782,8 +794,8 @@ a:focus {
   padding: 8px 35px;
   outline: none;
   border: none;
-  color: #ffffff;
-  background: #f89cab;
+  color: var(--white);
+  background: var(--primary1);
   margin-top: 15px;
   text-transform: uppercase;
 }
@@ -818,11 +830,11 @@ a:focus {
 }
 
 .info_section .info_link-box a:hover {
-  color: #ffffff;
+  color: var(--white);
 }
 
 .info_section .info_link-box a i {
-  color: #ffffff;
+  color: var(--white);
   margin-right: 5px;
   font-size: 18px;
 }
@@ -832,7 +844,7 @@ a:focus {
 }
 
 .info_section .info_link-box a:hover span {
-  color: #ffffff;
+  color: var(--white);
 }
 
 /* end info section */
@@ -856,3 +868,62 @@ a:focus {
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
+
+/*cart page*/
+.add-to-cart{
+  display: inline-block;
+  width: 100%;
+  margin-top: 1rem;
+  background-color: #f16179;
+  color: #ffffff;
+  border: 1px solid #f16179;
+  border-radius: 5px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+.add-to-cart:hover{
+  border: 1px solid #f16179;
+  background-color: transparent;
+  color: #f16179;
+}
+.container h3{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+.table{
+    margin-top: 3rem;
+    width: 100%;
+    word-wrap: break-word;
+}
+.table th{
+    background-color: #f16179;
+}
+.table img {
+    width: 50px;
+    height: auto;
+}
+.heading{
+    margin-top: 2rem;
+    border-top: 1px solid gray;
+}
+h4{
+    margin-top: 2rem;
+    font-weight: 800;
+}
+.heading button{
+  margin-top: 1rem;
+  background-color: #f16179;
+  color: #ffffff;
+  border: 1px solid #f16179;
+  border-radius: 5px;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  margin-bottom: 5rem;
+}
+.heading button:hover{
+  border: 1px solid #f16179;
+  background-color: transparent;
+  color: #f16179;
+}

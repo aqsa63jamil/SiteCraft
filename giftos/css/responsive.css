@@ -127,3 +127,115 @@
         max-width: 1170px;
     }
 }
+
+ /* Responsive Styles for Cart */
+ @media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    .table th, .table td {
+        font-size: 14px;
+        padding: 0.5rem;
+    }
+
+    .table img {
+        width: 40px;
+    }
+
+    .heading {
+        text-align: left;
+    }
+
+    .heading h4, .heading p {
+        font-size: 14px;
+    }
+
+    .heading button {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container h2 {
+        font-size: 24px;
+    }
+
+    .table th, .table td {
+        font-size: 12px;
+        padding: 0.3rem;
+    }
+
+    .table img {
+        width: 30px;
+    }
+
+    .heading {
+        margin-top: 1rem;
+    }
+
+    .heading h4, .heading p {
+        font-size: 12px;
+    }
+
+    .heading button {
+        margin-top: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 14px;
+    }
+}
+
+/* New Media Queries */
+@media (max-width: 420px) {
+    .container h2 {
+        font-size: 22px;
+    }
+
+    .table th, .table td {
+        font-size: 11px;
+        padding: 0.2rem;
+    }
+
+    .table img {
+        width: 28px;
+    }
+
+    .heading h4, .heading p {
+        font-size: 11px;
+    }
+
+    .heading button {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 376px) {
+    .container h2 {
+        font-size: 20px;
+    }
+
+    .table th, .table td {
+        font-size: 8px;
+        padding: 0.15rem;
+    }
+
+    .table img {
+        width: 25px;
+    }
+
+    .heading h4, .heading p {
+        font-size: 10px;
+    }
+
+    .heading button {
+        font-size: 12px;
+        padding: 0.25rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1170px;
+    }
+}
