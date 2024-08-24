@@ -1,3 +1,24 @@
+<?php
+session_start();
+include "./connection.php";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+    $query = $conn->prepare("INSERT INTO t_users (username, email, password) VALUES (?, ?, ?)");
+    
+    if ($query->execute([$username, $email, $password])) {
+        echo '<script>alert("Registration Successful");</script>';
+        header("Location: login.php");
+        exit();
+    } else {
+        $error = 'Registration failed!';
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en"><!-- Basic -->
 <head>
@@ -12,6 +33,8 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Site Icons -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
@@ -32,7 +55,97 @@
     <![endif]-->
 
 </head>
+<style>
+.register-container1 {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
 
+/* Form Header */
+h2 {
+    font-size:3rem;
+    font-weight:bold;
+    margin-top:2rem;
+    text-align: center;
+    color: #333;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Form Labels */
+.form-group label {
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+}
+
+/* Form Inputs */
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+/* Focused Input */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+/* Error Alert */
+.alert-danger {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+/* Submit Button */
+.btn-primary {
+    background-color:#000000;
+    border-color: #000000;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover and Focus for Button */
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #fff;
+    border-color: #000000;
+    color: #000000;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+}
+
+/* Register Link */
+.text-center p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.text-center a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.text-center a:hover {
+    color: #0056b3;
+}
+
+</style>
 <body>
 	<!-- Start header -->
 	<header class="top-navbar">
@@ -46,15 +159,19 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+						<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
 						<li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
 						<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-						<li class="nav-item active dropdown">
+						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Pages</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="reservation.html">Reservation</a>
+								<a class="dropdown-item" href="reservation.html">Order Now</a>
 								<a class="dropdown-item" href="stuff.html">Stuff</a>
 								<a class="dropdown-item" href="gallery.html">Gallery</a>
+								<a class="dropdown-item" href="./cart.html">Cart</a>
+								<a class="dropdown-item" href="./checkout.html">Checkout</a>
+								<a class="dropdown-item" href="./login.php">Login</a>
+								<a class="dropdown-item" href="./checkout.html">Register</a>
 							</div>
 						</li>
 						<li class="nav-item dropdown">
@@ -75,7 +192,7 @@
 							<span>
 							  Register
 							</span>
-						  </a></li>
+						  </a></li>					
 						<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 					</ul>
 				</div>
@@ -83,160 +200,39 @@
 		</nav>
 	</header>
 	<!-- End header -->
-	
-	<!-- Start All Pages -->
-	<div class="all-page-title page-breadcrumb">
-		<div class="container text-center">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1>Gallery</h1>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End All Pages -->
-	
-	<!-- Start Gallery -->
-	<div class="gallery-box">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>Gallery</h2>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-					</div>
-				</div>
-			</div>
-			<div class="tz-gallery">
-				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-01.jpg">
-							<img class="img-fluid" src="images/gallery-img-01.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-02.jpg">
-							<img class="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-03.jpg">
-							<img class="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-04.jpg">
-							<img class="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-05.jpg">
-							<img class="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images">
-						</a>
-					</div> 
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-06.jpg">
-							<img class="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Gallery -->
-	
-	<!-- Start Customer Reviews -->
-	<div class="customer-reviews-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="heading-title text-center">
-						<h2>Customer Reviews</h2>
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-8 mr-auto ml-auto text-center">
-					<div id="reviews" class="carousel slide" data-ride="carousel">
-						<div class="carousel-inner mt-4">
-							<div class="carousel-item text-center active">
-								<div class="img-box p-1 border rounded-circle m-auto">
-									<img class="d-block w-100 rounded-circle" src="images/profile-1.jpg" alt="">
-								</div>
-								<h5 class="mt-4 mb-0"><strong class="text-warning text-uppercase">Paul Mitchel</strong></h5>
-								<h6 class="text-dark m-0">Web Developer</h6>
-								<p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-							</div>
-							<div class="carousel-item text-center">
-								<div class="img-box p-1 border rounded-circle m-auto">
-									<img class="d-block w-100 rounded-circle" src="images/profile-3.jpg" alt="">
-								</div>
-								<h5 class="mt-4 mb-0"><strong class="text-warning text-uppercase">Steve Fonsi</strong></h5>
-								<h6 class="text-dark m-0">Web Designer</h6>
-								<p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-							</div>
-							<div class="carousel-item text-center">
-								<div class="img-box p-1 border rounded-circle m-auto">
-									<img class="d-block w-100 rounded-circle" src="images/profile-7.jpg" alt="">
-								</div>
-								<h5 class="mt-4 mb-0"><strong class="text-warning text-uppercase">Daniel vebar</strong></h5>
-								<h6 class="text-dark m-0">Seo Analyst</h6>
-								<p class="m-0 pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-							</div>
-						</div>
-						<a class="carousel-control-prev" href="#reviews" role="button" data-slide="prev">
-							<i class="fa fa-angle-left" aria-hidden="true"></i>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="carousel-control-next" href="#reviews" role="button" data-slide="next">
-							<i class="fa fa-angle-right" aria-hidden="true"></i>
-							<span class="sr-only">Next</span>
-						</a>
+
+      <!-- Start register -->
+<div class="register-container1 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center" style="margin-top: 7rem;">Register</h2>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <?php if (isset($error)): ?>
+                    <div class="alert alert-danger mt-3">
+                        <?php echo htmlspecialchars($error); ?>
                     </div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Customer Reviews -->
-	
-	<!-- Start Contact info -->
-	<div class="contact-imfo-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4">
-					<i class="fa fa-volume-control-phone"></i>
-					<div class="overflow-hidden">
-						<h4>Phone</h4>
-						<p class="lead">
-							+01 123-456-4590
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<i class="fa fa-envelope"></i>
-					<div class="overflow-hidden">
-						<h4>Email</h4>
-						<p class="lead">
-							yourmail@gmail.com
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<i class="fa fa-map-marker"></i>
-					<div class="overflow-hidden">
-						<h4>Location</h4>
-						<p class="lead">
-							800, Lorem Street, US
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- End Contact info -->
-	
-	<!-- Start Footer -->
+                <?php endif; ?>
+                <button type="submit" class="btn btn-primary mt-3">Register</button>
+            </form>
+            <p class="mt-3 text-center">Already have an account? <a href="./login.php">Login here</a></p>
+        </div>
+    </div>
+</div>
+<!-- End register -->
+
+    <!-- Start Footer -->
 	<footer class="footer-area bg-f">
 		<div class="container">
 			<div class="row">
@@ -292,6 +288,10 @@
 	<!-- End Footer -->
 	
 	<a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
+
+    <!-- Include jQuery and Bootstrap JS -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 	<!-- ALL JS FILES -->
 	<script src="js/jquery-3.2.1.min.js"></script>
