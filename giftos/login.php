@@ -1,3 +1,34 @@
+<?php
+session_start();
+include './connection.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $query = $conn->prepare("select * from giftos where email = ?");
+    if ($query === false) {
+        die('Prepare failed: ' . $conn->error);
+    }
+    $query->bind_param('s', $email);
+    $query->execute();
+    $result = $query->get_result();
+    $user = $result->fetch_assoc();
+
+    if ($user && password_verify($password, $user['password'])) {
+        // Set session variables
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['email'] = $user['email'];
+        header('Location: index.html');
+        exit();
+    } else {
+        $error = 'Invalid username or password';
+    }
+
+    $query->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -100,32 +131,37 @@
   
     </div>
     <!-- end hero area -->
-  
-    <div class="container mt-5">
-      <h2 class="text-center">Shopping Cart</h2>
-      <table class="table table-bordered">
-          <thead>
-              <tr>
-                  <th>Image</th>
-                  <th>Product Name</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total</th>
-                  <th>Remove</th>
-              </tr>
-          </thead>
-          <tbody id="cart-items"></tbody>
-      </table>
-      <div class="heading text-end">
-          <h4>Order summary</h4>
-          <p>Sub Total: $<span id="subtotal">0.00</span></p>
-          <p>Shipping Cost: Free</p>
-          <h4>Grand Total: $<span id="grandtotal">0.00</span></h4>
-          <button class="btn btn-proceed" onclick="proceedToCheckout()">Proceed to Checkout</button>
-      </div>
-  </div>
 
-    <!-- info section -->
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="text-center">Login</h2>
+                <form action="login.php" method="post">
+                    <!-- <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password:</label>
+                      <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <?php if (isset($error)): ?>
+                        <div class="alert alert-danger mt-3">
+                            <?php echo htmlspecialchars($error); ?>
+                        </div>
+                    <?php endif; ?>
+                    <button type="submit" class="btn btn-primary mt-3">Register</button>
+                </form>
+                <p class="mt-3 text-center">Don't hane an account? <a href="./register.php">Register here</a></p>
+            </div>
+        </div>
+    </div>
+
+     <!-- info section -->
 
   <section class="info_section  layout_padding2-top">
     <div class="social_container">
@@ -211,80 +247,7 @@
 
   </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const cartItemsContainer = document.getElementById('cart-items');
-        let cart = JSON.parse(localStorage.getItem('giftosCart')) || [];
-
-        function updateCartDisplay() {
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<tr><td colspan="6" class="text-center">Your cart is empty.</td></tr>';
-                document.getElementById('subtotal').textContent = '0.00';
-                document.getElementById('grandtotal').textContent = '0.00';
-                return;
-            }
-
-            let cartHtml = '';
-            let subtotal = 0;
-
-            cart.forEach((product, index) => {
-                const price = parseFloat(product.price);
-                const total = price * product.quantity;
-                subtotal += total;
-
-                cartHtml += `
-                    <tr>
-                        <td><img src="${product.image}" alt="${product.name}" style="width: 50px;"></td>
-                        <td>${product.name}</td>
-                        <td>$${price.toFixed(2)}</td>
-                        <td>
-                            <input type="number" value="${product.quantity}" min="1" data-index="${index}" class="quantity-input">
-                        </td>
-                        <td>$${total.toFixed(2)}</td>
-                        <td><button class="btn btn-danger remove-from-cart" data-index="${index}">&times;</button></td>
-                    </tr>
-                `;
-            });
-
-            cartItemsContainer.innerHTML = cartHtml;
-            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-            document.getElementById('grandtotal').textContent = subtotal.toFixed(2);
-
-            // Update quantity
-            document.querySelectorAll('.quantity-input').forEach(input => {
-                input.addEventListener('change', function () {
-                    const index = this.getAttribute('data-index');
-                    const newQuantity = parseInt(this.value);
-                    if (newQuantity > 0) {
-                        cart[index].quantity = newQuantity;
-                        localStorage.setItem('giftosCart', JSON.stringify(cart));
-                        updateCartDisplay(); // Update the display without reloading the page
-                    }
-                });
-            });
-
-            // Remove from cart
-            document.querySelectorAll('.remove-from-cart').forEach(button => {
-                button.addEventListener('click', function () {
-                    const index = this.getAttribute('data-index');
-                    cart.splice(index, 1);
-                    localStorage.setItem('giftosCart', JSON.stringify(cart));
-                    updateCartDisplay(); // Update the display without reloading the page
-                });
-            });
-        }
-
-        updateCartDisplay(); // Initial call to display the cart items
-    });
-
-    function proceedToCheckout() {
-        // Store cart data in localStorage for checkout
-        localStorage.setItem('checkoutGiftosCart', JSON.stringify(JSON.parse(localStorage.getItem('giftosCart')) || []));
-        window.location.href = 'checkout.html';
-    }
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
