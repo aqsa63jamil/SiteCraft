@@ -53,7 +53,6 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
                             <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
                             <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
                         </ul>
@@ -119,8 +118,8 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.php">About Us</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="./index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./about.php">About Us</a></li>
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
                             <ul class="dropdown-menu">
@@ -128,7 +127,8 @@
 								<li><a href="shop-detail.php">Shop Detail</a></li>
                                 <li><a href="cart.php">Cart</a></li>
                                 <li><a href="checkout.php">Checkout</a></li>
-                                <li><a href="my-account.php">My Account</a></li>
+                                <li><a href="./login.php">Login</a></li>
+								<li><a href="./register.php">Register</a></li>
                                 <li><a href="wishlist.php">Wishlist</a></li>
                             </ul>
                         </li>
@@ -139,19 +139,19 @@
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
-<div class="attr-nav">
-    <ul>
-        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-        <li class="side-menu">
-            <a href="#">
-                <i class="fa fa-shopping-bag"></i>
-                <span class="badge" id="cart-count">0</span>
-                <p>My Cart</p>
-            </a>
-        </li>
-    </ul>
-</div>
-<!-- End Atribute Navigation -->
+                <div class="attr-nav">
+                    <ul>
+                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+                        <li class="side-menu">
+                            <a href="cart.php">
+                                <i class="fa fa-shopping-bag"></i>
+                                <span class="badge" id="cart-count">0</span>
+                                <p>My Cart</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Atribute Navigation -->
 
             </div>
             <!-- Start Side Menu -->

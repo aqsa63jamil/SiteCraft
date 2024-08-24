@@ -127,7 +127,7 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user s_color"></i> My Account</a></li>
+                            
                             <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li>
                             <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li>
                         </ul>
@@ -202,7 +202,8 @@
 								<li><a href="shop-detail.php">Shop Detail</a></li>
                                 <li><a href="cart.php">Cart</a></li>
                                 <li><a href="checkout.php">Checkout</a></li>
-                                <li><a href="my-account.php">My Account</a></li>
+                                <li><a href="./login.php">Login</a></li>
+								<li><a href="./register.php">Register</a></li>
                                 <li><a href="wishlist.php">Wishlist</a></li>
                             </ul>
                         </li>
@@ -216,7 +217,7 @@
                 <div class="attr-nav">
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        <li class="side-menu"><a href="#">
+                        <li class="side-menu"><a href="./cart.php">
 						<i class="fa fa-shopping-bag"></i>
                             <span class="badge">3</span>
 							<p>My Cart</p>
