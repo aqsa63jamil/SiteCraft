@@ -65,6 +65,9 @@ include "./Connection/connection.php";
                         </li>
                     </ul>
                 </nav>
+                <div class="menu-icon" onclick="toggleMenu()">
+                &#9776;
+                </div>
             </div>
         </header>
 
@@ -161,7 +164,6 @@ include "./Connection/connection.php";
                         <ul class="list-unstyled">
                             <li><a href="./index.php" class="text-white">Home</a></li>
                             <li><a href="./aboutus.php" class="text-white">About</a></li>
-                            <li><a href="#" class="text-white">Services</a></li>
                             <li><a href="./contact.php" class="text-white">Contact</a></li>
                         </ul>
                     </div>
@@ -200,7 +202,7 @@ include "./Connection/connection.php";
                     if (entry.isIntersecting) {
                         entry.target.classList.add('reveal-active');
                     } else {
-                        entry.target.classList.remove('reveal-active'); // Remove active class when element is not intersecting
+                        entry.target.classList.remove('reveal-active'); 
                     }
                 });
             }, { threshold: 0.1 });

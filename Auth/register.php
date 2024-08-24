@@ -83,6 +83,9 @@ require_once "controllerUserData.php";
                     </li>
                 </ul>
             </nav>
+            <div class="menu-icon" onclick="toggleMenu()">
+                &#9776;
+            </div>
         </div>
     </header>
 
@@ -175,17 +178,16 @@ require_once "controllerUserData.php";
                 <div class="col-md-4">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="./index.php" class="text-white">Home</a></li>
-                        <li><a href="./aboutus.php" class="text-white">About</a></li>
-                        <li><a href="#" class="text-white">Services</a></li>
-                        <li><a href="./contact.php" class="text-white">Contact</a></li>
+                        <li><a href="../index.php" class="text-white">Home</a></li>
+                        <li><a href="../aboutus.php" class="text-white">About</a></li>
+                        <li><a href="../contact.php" class="text-white">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5>Support</h5>
                     <ul class="list-unstyled">
-                        <li><a href="./FAQs.php" class="text-white">FAQs</a></li>
-                        <li><a href="./help.php" class="text-white">Help</a></li>
+                        <li><a href="../FAQs.php" class="text-white">FAQs</a></li>
+                        <li><a href="../help.php" class="text-white">Help</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
