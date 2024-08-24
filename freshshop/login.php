@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = $conn->prepare("select * from freshshop where email = ?");
+    $query = $conn->prepare("select * from t_users where email = ?");
     if ($query === false) {
         die('Prepare failed: ' . $conn->error);
     }
