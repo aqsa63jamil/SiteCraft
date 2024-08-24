@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2024 at 03:59 AM
+-- Generation Time: Aug 24, 2024 at 08:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -199,6 +199,29 @@ INSERT INTO `store` (`id`, `name`, `category`, `logo`, `published`, `created_by`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t_users`
+--
+
+CREATE TABLE `t_users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `t_users`
+--
+
+INSERT INTO `t_users` (`id`, `username`, `password`, `email`, `created_at`) VALUES
+(1, 'zoya', '$2y$10$J2LiSwHdqZmgkj7d9jKwZ.8WiqcpNGYWJQZyQVPjdYtm6p5qbMw2K', 'zoya@gmail.com', '2024-08-24 01:58:13'),
+(2, 'Alina', '$2y$10$2EWGJgM5cktp170/cxWKwO.4A7iTCajDPMokexjy8HwFzBl90B9G.', 'alina5@gmail.com', '2024-08-24 04:06:36'),
+(3, 'Adam', '$2y$10$05PtkOXKiBzioX7nGUB44OEwxsiMqbmhjInoAb8aMlipQsV.R6ydq', 'adam@gmail.com', '2024-08-24 05:57:53');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -289,6 +312,14 @@ ALTER TABLE `store`
   ADD KEY `created_by` (`created_by`);
 
 --
+-- Indexes for table `t_users`
+--
+ALTER TABLE `t_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -339,6 +370,12 @@ ALTER TABLE `order_details`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `t_users`
+--
+ALTER TABLE `t_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
