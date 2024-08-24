@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-    $query = $conn->prepare("insert into giftos (username, email, password) VALUES (?, ?, ?)");
+    $query = $conn->prepare("insert into t_users (username, email, password) VALUES (?, ?, ?)");
     if ($query->execute([$username, $email, $password])) {
         echo '<script>
         alert("Registration Successful")
